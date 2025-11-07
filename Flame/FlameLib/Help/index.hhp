@@ -1,0 +1,30 @@
+[OPTIONS]
+Compatibility=1.1 or later
+Compiled file=FlameLang.chm
+Contents file=index.hhc
+Default topic=index.html
+Display compile progress=No
+Language=0x409 English (United States)
+[FILES]
+index.html
+style.css
+Language.html
+Rule.html
+KeywordItem.html
+KeyItem.html
+IdentifierItem.html
+IntItem.html
+FloatItem.html
+StringItem.html
+FlagItem.html
+EnumItem.html
+DefItem.html
+RefItem.html
+RegexItem.html
+ListOption.html
+Compile.html
+TypeCompile.html
+SimpleText.html
+InitialTemplate.html
+
+[INFOTYPES]

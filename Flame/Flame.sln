@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36518.9 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Flame", "Flame\Flame.vbproj", "{3C082543-21CD-4A3C-AA8C-00890A9F055F}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "FlameIDE", "FlameIDE\FlameIDE.vbproj", "{045D0AEA-9CA0-4527-9429-1A6C938DBC1E}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "FlameLib", "FlameLib\FlameLib.vbproj", "{DD67D98D-32DE-493E-BEC2-FA9BF949D43A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3C082543-21CD-4A3C-AA8C-00890A9F055F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C082543-21CD-4A3C-AA8C-00890A9F055F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C082543-21CD-4A3C-AA8C-00890A9F055F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C082543-21CD-4A3C-AA8C-00890A9F055F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{045D0AEA-9CA0-4527-9429-1A6C938DBC1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{045D0AEA-9CA0-4527-9429-1A6C938DBC1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{045D0AEA-9CA0-4527-9429-1A6C938DBC1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{045D0AEA-9CA0-4527-9429-1A6C938DBC1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD67D98D-32DE-493E-BEC2-FA9BF949D43A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD67D98D-32DE-493E-BEC2-FA9BF949D43A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD67D98D-32DE-493E-BEC2-FA9BF949D43A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD67D98D-32DE-493E-BEC2-FA9BF949D43A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {329F9201-A891-4229-8573-9E32A8417329}
+	EndGlobalSection
+EndGlobal

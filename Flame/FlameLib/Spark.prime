@@ -1,0 +1,218 @@
+﻿
+
+	language(1.0) FlameLang "Flame Language" ext "flame"
+	
+	{
+		by "Mohammed MRT"
+		on "2025-10-27"
+		desc "Script Language"
+		
+		rule Language "Definition" desc "Language definition"
+		{
+			"language"
+			"("
+			float Version desc "Language version"
+			")"
+			key desc "Language name"
+			string Description desc "Language short description"
+			//"ext"
+			//string Extension desc "Language source code file extension"
+			"by"
+			string Creator desc "Creator name"
+			"on"
+			string CreationDate  desc "Creation date"
+			"{"
+			opt def InitialTemplateDef(InitialTemplate) desc "InitialTemplate"
+			def Rules(Rule)[] desc "Rules"
+			def Compilers(Compile,TypeCompile)[] desc "Compilers"
+			"}"
+		}
+		
+		
+
+		
+		rule Rule "Rule" desc "Rule definition" {
+			"rule"
+			key desc "Rule name"
+			//string Title desc "Title"
+			//"desc"
+			string Description desc "Rule short description"
+			"{"
+			def Items(KeywordItem,KeyItem,IdentifierItem,IntItem,FloatItem,StringItem,FlagItem,EnumItem,DefItem,RefItem,RegexItem)[] desc "Rule items"
+			
+			"}"
+		}
+		
+		
+
+		
+		//code,text,title,image,file
+		
+		rule KeywordItem "Keyword" desc "Rules keywords definition" {
+			string KeywordText desc "Keyword Text"
+		}
+		
+		rule KeyItem "Rule Key" desc "Rule Key definition" {
+			"key"
+			"desc"
+			string Description desc "Description"
+		}
+		
+		rule IdentifierItem "Identifier" desc "Identifier definition" {
+			flag IsOptional "opt" desc "Is Optional?"
+			"id"
+			//key desc "Name"
+			id Name desc "Name"
+			opt def ListOption(ListOption) desc "List option definition"
+			"desc"
+			string Description desc "Description"
+		}
+		
+		rule IntItem "Integer" desc "Integer definition" {
+			flag IsOptional "opt" desc "Is Optional?"
+			"int"
+			//key desc "Name"
+			id Name desc "Name"
+			opt def ListOption(ListOption) desc "List option definition"
+			"desc"
+			string Description desc "Description"
+		}
+		
+		rule FloatItem "Float" desc "Float definition" {
+			flag IsOptional "opt" desc "Is Optional?"
+			"float"
+			//key desc "Name"
+			id Name desc "Name"
+			opt def ListOption(ListOption) desc "List option definition"
+			"desc"
+			string Description desc "Description"
+		}
+		
+		rule StringItem "String" desc "String definition" {
+			flag IsOptional "opt" desc "Is Optional?"
+			"string"
+			//key desc "Name"
+			id Name desc "Name"
+			opt def ListOption(ListOption) desc "List option definition"
+			"desc"
+			string Description desc "Description"
+		}
+		
+		rule FlagItem "Flag Item" desc "Flag definition" {
+			"flag"
+			//key desc "Name"
+			id Name desc "Name"
+			string FlagText desc "Flag text"
+			"desc"
+			string Description desc "Description"
+		}
+		
+		rule EnumItem "Enumeration list" desc "Enumeration list definition" {
+			flag IsOptional "opt" desc "Is Optional?"
+			"enum"
+			//key desc "Name"
+			id Name desc "Name"
+			"("
+			id EnumerationItems[","] desc "Enumeration list"
+			")"
+			"desc"
+			string Description desc "Description"
+		}
+		
+		rule DefItem "Defintion" desc "Defintion item definition" {
+			flag IsOptional "opt" desc "Is Optional?"
+			"def"
+			//key desc "Name"
+			id Name desc "Name"
+			"("
+			ref Rules(Rule)[","] desc "Rules"
+			")"
+			opt def ListOption(ListOption) desc "List option definition"
+			"desc"
+			string Description desc "Description"
+		}
+		
+		rule RefItem "Reference" desc "Reference item definition" {
+			flag IsOptional "opt" desc "Is Optional?"
+			"ref"
+			id Name desc "Name"
+			"("
+			ref RuleRef(Rule)  desc "Rule"
+			")"
+			opt def ListOption(ListOption) desc "List option definition"
+			"desc"
+			string Description desc "Description"
+		}
+
+		
+		rule RegexItem "Regex Item" desc "Regex  definition" {
+			flag IsOptional "opt" desc "Is Optional?"
+			"regex"
+			"("
+			string Pattern desc "Description"
+			")"
+			id Name desc "Name"
+			opt def ListOption(ListOption) desc "List option definition"
+
+			"desc"
+			string Description desc "Description"
+		}
+		
+		rule ListOption "List option" desc "List option definition" {
+			"["
+			opt string Separator desc "Separator"
+			"]"
+		}
+		
+
+		
+		rule Compile "" desc ""
+		{
+			"compile"
+			key desc "Name"
+			"to"
+			string OutputFile desc "OutputFile"
+			"{"
+			def Body(SimpleText)[] desc "Body"
+			"}"
+
+		}
+		
+		rule TypeCompile "" desc ""
+		{
+			"compile"
+			"("
+			ref RuleRef(Rule) desc "Rule"
+			")"
+			
+			key desc "Name"
+			"to"
+			string OutputFile desc "OutputFile"
+			"{"
+			
+			def Body(SimpleText)[] desc "Body"
+			
+			"}"
+			
+		}
+		
+		rule SimpleText "" desc ""
+		{
+			string Text desc "Script Description"
+		}
+		/*
+		rule TemplateText "" desc ""
+		{
+			"$"
+			string Text desc "Script Description"
+		}
+		*/
+		
+		rule InitialTemplate "InitialTemplate" desc "InitialTemplate"
+		{
+			"template"
+			"{"
+			string Lines[] desc "Lines"
+			"}"
+		}
+	}

@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ScintillaNET>
+  <Language Name="FlameLang">
+    <AutoComplete FillUpCharacters=".([" SingleLineAccept="True" IsCaseSensitive="False">
+      <List>
+          language
+        by
+        on
+        rule
+        key
+        desc
+        opt
+        id
+        int
+        float
+        string
+        flag
+        enum
+        def
+        ref
+        regex
+        compile
+        to
+        template
+      </List>
+    </AutoComplete>
+    <Lexer LexerName="cpp" StreamCommentPrefix="/*" StreamCommentSuffix="*/" >
+      <Keywords List="0">
+        language
+        by
+        on
+        rule
+        key
+        desc
+        opt
+        id
+        int
+        float
+        string
+        flag
+        enum
+        def
+        ref
+        regex
+        compile
+        to
+        template
+      </Keywords>
+      <Keywords List="1"></Keywords>
+    </Lexer>
+    <Styles>
+      <Style Name="DEFAULT" ForeColor="#00008e" FontName="Tahoma" Size="11"/>
+      <Style Name="COMMENT" ForeColor="Gray" Italic="Yes"/>
+      <Style Name="COMMENTLINE" ForeColor="Gray" Italic="Yes"/>
+      <Style Name="NUMBER" ForeColor="Black" />
+      <Style Name="WORD" Bold="Yes" ForeColor="#99004d" />
+      <Style Name="WORD2" Bold="Yes" ForeColor="red" />
+      <Style Name="OPERATOR"    ForeColor="#99004d" />
+      <Style Name="STRING"  ForeColor="#669900" />
+      <Style Name="StringEol"   ForeColor="#669900" /> 
+      <!---->
+    </Styles>
+  </Language>
+</ScintillaNET>
