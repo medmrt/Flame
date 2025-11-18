@@ -14,7 +14,7 @@ Public Class frmLanguageRun
     Private AutoCompleteList As String = ""
     Private ErroLineStyleMarkIndex As Integer = 10
     Private ErroMarkSymbolIndex As Integer = 11
-    Private Ext As String = "flamx"
+    Private Ext As String = $"{FlameLib.FlameLang.CodeFileExtension}"
     Overloads Function ShowDialog(P As Language, Code As String, _OutputFolder As String, Keywords As String) As DialogResult
 
 
@@ -86,7 +86,7 @@ Public Class frmLanguageRun
 
 
         Try
-            Dim sourceFiles() As String = Directory.GetFiles(OutputFolder, $"*{Prg.Name}.flamx")
+            Dim sourceFiles() As String = Directory.GetFiles(OutputFolder, $"*.{Prg.Name}.{FlameLib.FlameLang.CodeFileExtension}")
             If sourceFiles.Length > 0 Then
 
                 OpenFile(sourceFiles.First)

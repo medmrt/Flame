@@ -175,7 +175,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="flame-file.ico" />
+    <Content Include="flame-file.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="flame-file.png" />
     <Content Include="flame.ico" />
     <Content Include="flame.png" />

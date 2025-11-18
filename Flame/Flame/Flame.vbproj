@@ -173,9 +173,18 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="flames-file.png" />
-    <Content Include="flames.ico" />
-    <None Include="flames.png" />
+    <Content Include="flames-file.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="flames-file.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="flames.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="flames.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="Irony.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

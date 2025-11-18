@@ -377,6 +377,20 @@ Public Class frmMain
 
         End Try
 
+
+
+
+        Dim arguments As String() = Environment.GetCommandLineArgs()
+        If arguments.Count = 2 Then
+            Dim PassedFileName As String = arguments.Last
+            If IO.File.Exists(PassedFileName) Then
+                OpenFile(PassedFileName)
+                ShowReCentItems()
+                Exit Sub
+            End If
+        End If
+
+
         ShowReCentItems()
 
 
@@ -461,4 +475,22 @@ Public Class frmMain
     Public Class RecentFile
 
     End Class
+
+    Private Sub RunIDEToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RunIDEToolStripMenuItem.Click
+        Dim CurrentPath As String = txtPath.Text.Trim
+        If CurrentPath <> "" Then
+            Dim currentPathFolder As String = CurrentPath.Substring(0, CurrentPath.LastIndexOf("\"))
+
+            Dim FoundedFile As String = ""
+            For Each it In IO.Directory.GetFiles(currentPathFolder, $"*.{FlameLib.FlameLang.CodeFileExtension}")
+                FoundedFile = it
+            Next
+            If FoundedFile <> "" Then
+                Process.Start(FoundedFile)
+            End If
+        Else
+            MsgBox("No File founded")
+        End If
+
+    End Sub
 End Class

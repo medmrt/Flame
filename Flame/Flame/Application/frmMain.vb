@@ -31,6 +31,7 @@ Public Class frmMain
             AppendTempLanguage()
 
             ResetCurrentKeywordBasedOnFile()
+            UpdateRecentFiles(FilePath)
         Else
             Dim opnFile As New OpenFileDialog
             opnFile.Filter = $"Flames Code Files|*.{FlameLib.FlameLang.CodeFileExtension};"
@@ -39,9 +40,10 @@ Public Class frmMain
                 txtCode.Tag = opnFile.FileName
                 txtFilePath.Text = opnFile.FileName
 
+
                 AppendTempLanguage()
                 ResetCurrentKeywordBasedOnFile()
-
+                UpdateRecentFiles(opnFile.FileName)
             End If
         End If
 
@@ -239,6 +241,9 @@ Public Class frmMain
             txtCode.Tag = FileName
             txtFilePath.Text = FileName
             ResetCurrentKeywordBasedOnFile()
+
+
+            'this is a comment to test
         End If
     End Sub
 
@@ -330,7 +335,36 @@ Public Class frmMain
 
     Private ErroLineStyleMarkIndex As Integer = 10
     Private ErroMarkSymbolIndex As Integer = 11
+    Private Const MAX_RECENT_FILES As Integer = 5
+    Public Sub UpdateRecentFiles(ByVal filePath As String)
+        ' 1. Get the current list (ensure it's initialized)
+        Dim recentFiles As System.Collections.Specialized.StringCollection = My.Settings.RecentFiles
+        If recentFiles Is Nothing Then
+            recentFiles = New System.Collections.Specialized.StringCollection()
+        End If
+
+        ' 2. Remove the path if it already exists (to move it to the top)
+        If recentFiles.Contains(filePath) Then
+            recentFiles.Remove(filePath)
+        End If
+
+        ' 3. Insert the new path at the beginning
+        recentFiles.Insert(0, filePath)
+
+        ' 4. Trim the list to the maximum size
+        While recentFiles.Count > MAX_RECENT_FILES
+            recentFiles.RemoveAt(recentFiles.Count - 1)
+        End While
+
+        ' 5. Save the updated list to user settings
+        My.Settings.RecentFiles = recentFiles
+        My.Settings.Save()
+    End Sub
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+
+
+
         Try
             txtCode.Markers(ErroMarkSymbolIndex).Symbol = MarkerSymbol.Arrow
             txtCode.Markers(ErroLineStyleMarkIndex).Symbol = MarkerSymbol.Background
@@ -340,6 +374,114 @@ Public Class frmMain
         Catch ex As Exception
 
         End Try
+
+
+
+
+
+        LoadLanguages()
+
+
+        Dim arguments As String() = Environment.GetCommandLineArgs()
+        If arguments.Count = 2 Then
+            Dim PassedFileName As String = arguments.Last
+            If IO.File.Exists(PassedFileName) Then
+                OpenFile(PassedFileName)
+                ShowReCentItems()
+                Exit Sub
+            End If
+        End If
+
+        NewFile()
+        ShowReCentItems()
+    End Sub
+
+    Public Class RecentFile
+
+    End Class
+
+    Sub ShowReCentItems()
+        Dim recentFiles As System.Collections.Specialized.StringCollection = My.Settings.RecentFiles
+        If recentFiles IsNot Nothing Then
+            'Remove last items
+            Dim LastMenu As New List(Of ToolStripMenuItem)
+            For Each it In mnuFile.DropDownItems
+                If TypeOf it.Tag Is RecentFile Then
+                    LastMenu.Add(it)
+                End If
+
+            Next
+
+            For Each it In LastMenu
+                mnuFile.DropDownItems.Remove(it)
+            Next
+
+
+            For Each it In recentFiles
+                Dim ToolStringMenuItemX As New ToolStripMenuItem(it)
+                AddHandler ToolStringMenuItemX.Click, Sub()
+                                                          OpenFile(it)
+                                                      End Sub
+                ToolStringMenuItemX.Tag = New RecentFile
+                mnuFile.DropDownItems.Insert(4, ToolStringMenuItemX)
+            Next
+
+            If recentFiles.Count > 0 Then
+                mnuFile.DropDownItems.Insert(4, New ToolStripSeparator)
+            End If
+        End If
+
+    End Sub
+
+
+    Sub LoadLanguages()
+        If Not My.Computer.FileSystem.DirectoryExists($"{Application.StartupPath}\Languages\") Then
+            My.Computer.FileSystem.CreateDirectory($"{Application.StartupPath}\Languages\")
+            Exit Sub
+        End If
+
+
+        'Site.spark
+        Compilers = New Hashtable
+        Languages = New Hashtable
+        'ToolStripMenuItem
+        LanguagesToolStripMenuItem.DropDownItems.Clear()
+        LanguageMenu.Clear()
+
+        Dim files As ReadOnlyCollection(Of String)
+
+        files = My.Computer.FileSystem.GetFiles($"{Application.StartupPath}\Languages\", FileIO.SearchOption.SearchAllSubDirectories, $"*.{FlameLib.FlameLang.CodeFileExtension}")
+
+        For Each f In files
+            Dim LanguageSourceCode As String = My.Computer.FileSystem.ReadAllText(f, System.Text.Encoding.UTF8)
+            Dim G As New FlameLang
+            Dim P = G.Parse(LanguageSourceCode)
+            If TypeOf P Is Language Then
+                If Not Compilers.ContainsKey(P.Name.ToLower) Then
+                    Languages(P.Name.ToLower) = P
+                    Compilers(P.Name.ToLower) = New LanguageCompiler(P)
+                    Dim mnu As New ToolStripMenuItem(P.Name)
+                    mnu.Tag = P
+                    mnu.CheckOnClick = True
+
+                    AddHandler mnu.Click, Sub()
+                                              For Each it As ToolStripMenuItem In LanguagesToolStripMenuItem.DropDownItems
+                                                  it.Checked = False
+                                              Next
+                                              mnu.Checked = Not mnu.Checked
+                                              ResetKeywords()
+                                          End Sub
+                    LanguageMenu.Add(mnu)
+                End If
+            End If
+        Next
+
+        If LanguageMenu.Count > 0 Then
+            LanguagesToolStripMenuItem.DropDownItems.AddRange(LanguageMenu.ToArray)
+        End If
+
+        ResetCurrentKeywordBasedOnFile()
+
     End Sub
 
     Private Sub PToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PToolStripMenuItem.Click

@@ -25,10 +25,10 @@ Partial Class frmFileTypeSelector
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmFileTypeSelector))
         Me.LvwLanguages = New System.Windows.Forms.ListView()
+        Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.SuspendLayout()
         '
         'LvwLanguages
@@ -41,6 +41,12 @@ Partial Class frmFileTypeSelector
         Me.LvwLanguages.SmallImageList = Me.ImageList1
         Me.LvwLanguages.TabIndex = 0
         Me.LvwLanguages.UseCompatibleStateImageBehavior = False
+        '
+        'ImageList1
+        '
+        Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"), System.Windows.Forms.ImageListStreamer)
+        Me.ImageList1.TransparentColor = System.Drawing.Color.Transparent
+        Me.ImageList1.Images.SetKeyName(0, "flames-file.png")
         '
         'Button1
         '
@@ -70,12 +76,6 @@ Partial Class frmFileTypeSelector
         Me.Label1.TabIndex = 3
         Me.Label1.Text = "Select A Language"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'ImageList1
-        '
-        Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"), System.Windows.Forms.ImageListStreamer)
-        Me.ImageList1.TransparentColor = System.Drawing.Color.Transparent
-        Me.ImageList1.Images.SetKeyName(0, "flames-file.png")
         '
         'frmFileTypeSelector
         '

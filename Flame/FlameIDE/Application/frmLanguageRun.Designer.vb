@@ -253,7 +253,7 @@ Partial Class frmLanguageRun
         Me.TabControl1.Location = New System.Drawing.Point(3, 3)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(957, 107)
+        Me.TabControl1.Size = New System.Drawing.Size(957, 103)
         Me.TabControl1.TabIndex = 2
         '
         'TabPage1
@@ -262,7 +262,7 @@ Partial Class frmLanguageRun
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(949, 81)
+        Me.TabPage1.Size = New System.Drawing.Size(949, 77)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Console"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -287,7 +287,7 @@ Partial Class frmLanguageRun
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(949, 81)
+        Me.TabPage2.Size = New System.Drawing.Size(949, 77)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Output"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -301,7 +301,7 @@ Partial Class frmLanguageRun
         Me.lvwOutputFiles.HideSelection = False
         Me.lvwOutputFiles.Location = New System.Drawing.Point(3, 3)
         Me.lvwOutputFiles.Name = "lvwOutputFiles"
-        Me.lvwOutputFiles.Size = New System.Drawing.Size(943, 75)
+        Me.lvwOutputFiles.Size = New System.Drawing.Size(943, 71)
         Me.lvwOutputFiles.TabIndex = 0
         Me.lvwOutputFiles.UseCompatibleStateImageBehavior = False
         Me.lvwOutputFiles.View = System.Windows.Forms.View.Details

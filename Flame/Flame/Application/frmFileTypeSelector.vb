@@ -30,4 +30,8 @@ Public Class frmFileTypeSelector
     Private Sub LvwLanguages_DoubleClick(sender As Object, e As EventArgs) Handles LvwLanguages.DoubleClick
         SelectALanguage()
     End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        DialogResult = DialogResult.Cancel
+    End Sub
 End Class
