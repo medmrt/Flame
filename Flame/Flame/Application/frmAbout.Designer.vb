@@ -101,7 +101,7 @@ Partial Class frmAbout
         Me.MinimizeBox = False
         Me.Name = "frmAbout"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "frmAbout"
+        Me.Text = "About"
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 

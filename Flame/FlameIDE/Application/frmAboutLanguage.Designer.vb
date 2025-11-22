@@ -88,7 +88,7 @@ Partial Class frmAboutLanguage
         Me.MinimizeBox = False
         Me.Name = "frmAboutLanguage"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "frmAboutLanguage"
+        Me.Text = "About Language"
         Me.ResumeLayout(False)
 
     End Sub

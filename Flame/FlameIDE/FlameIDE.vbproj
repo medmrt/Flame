@@ -108,9 +108,7 @@
     <Compile Include="Application\frmAboutLanguage.Designer.vb">
       <DependentUpon>frmAboutLanguage.vb</DependentUpon>
     </Compile>
-    <Compile Include="Application\frmAboutLanguage.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Application\frmAboutLanguage.vb" />
     <Compile Include="Application\frmLanguageRun.Designer.vb">
       <DependentUpon>frmLanguageRun.vb</DependentUpon>
     </Compile>
