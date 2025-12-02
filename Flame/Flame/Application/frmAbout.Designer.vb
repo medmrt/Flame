@@ -34,10 +34,10 @@ Partial Class frmAbout
         'Label3
         '
         Me.Label3.Font = New System.Drawing.Font("Tahoma", 12.0!)
-        Me.Label3.ForeColor = System.Drawing.Color.Black
-        Me.Label3.Location = New System.Drawing.Point(67, 284)
+        Me.Label3.ForeColor = System.Drawing.Color.Gray
+        Me.Label3.Location = New System.Drawing.Point(67, 308)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(273, 24)
+        Me.Label3.Size = New System.Drawing.Size(273, 19)
         Me.Label3.TabIndex = 17
         Me.Label3.Text = "medmrt@gmail.com"
         Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -45,9 +45,10 @@ Partial Class frmAbout
         'LinkLabel1
         '
         Me.LinkLabel1.ForeColor = System.Drawing.Color.Black
-        Me.LinkLabel1.Location = New System.Drawing.Point(67, 252)
+        Me.LinkLabel1.LinkColor = System.Drawing.Color.DimGray
+        Me.LinkLabel1.Location = New System.Drawing.Point(67, 287)
         Me.LinkLabel1.Name = "LinkLabel1"
-        Me.LinkLabel1.Size = New System.Drawing.Size(273, 27)
+        Me.LinkLabel1.Size = New System.Drawing.Size(273, 21)
         Me.LinkLabel1.TabIndex = 16
         Me.LinkLabel1.TabStop = True
         Me.LinkLabel1.Text = "www.flame.com"
@@ -56,8 +57,8 @@ Partial Class frmAbout
         'lblVers
         '
         Me.lblVers.Font = New System.Drawing.Font("Tahoma", 12.0!)
-        Me.lblVers.ForeColor = System.Drawing.Color.Black
-        Me.lblVers.Location = New System.Drawing.Point(67, 223)
+        Me.lblVers.ForeColor = System.Drawing.Color.Gray
+        Me.lblVers.Location = New System.Drawing.Point(66, 263)
         Me.lblVers.Name = "lblVers"
         Me.lblVers.Size = New System.Drawing.Size(273, 24)
         Me.lblVers.TabIndex = 15
@@ -68,9 +69,9 @@ Partial Class frmAbout
         '
         Me.Label1.Font = New System.Drawing.Font("Tahoma", 30.0!)
         Me.Label1.ForeColor = System.Drawing.Color.Black
-        Me.Label1.Location = New System.Drawing.Point(67, 157)
+        Me.Label1.Location = New System.Drawing.Point(67, 216)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(273, 61)
+        Me.Label1.Size = New System.Drawing.Size(273, 47)
         Me.Label1.TabIndex = 14
         Me.Label1.Text = "Flame"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -78,9 +79,9 @@ Partial Class frmAbout
         'PictureBox1
         '
         Me.PictureBox1.Image = Global.Flame.My.Resources.Resources.flames
-        Me.PictureBox1.Location = New System.Drawing.Point(67, 34)
+        Me.PictureBox1.Location = New System.Drawing.Point(67, 37)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(273, 120)
+        Me.PictureBox1.Size = New System.Drawing.Size(273, 176)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox1.TabIndex = 18
         Me.PictureBox1.TabStop = False
