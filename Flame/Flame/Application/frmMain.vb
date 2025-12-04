@@ -67,15 +67,15 @@ Public Class frmMain
 
 
         For Each f In files
-            Dim LanguageSourceCode As String = My.Computer.FileSystem.ReadAllText(f, System.Text.Encoding.UTF8)
-            Dim G As New FlameLang
-            Dim P = G.Parse(LanguageSourceCode)
-            If TypeOf P Is Language Then
-                If Not Compilers.ContainsKey(P.Name.ToLower) Then
-                    Languages(P.Name.ToLower) = P
-                    Compilers(P.Name.ToLower) = New LanguageCompiler(P)
-                    Dim mnu As New ToolStripMenuItem(P.Name)
-                    mnu.Tag = P
+            Dim flameLanguageSourceCode As String = My.Computer.FileSystem.ReadAllText(f, System.Text.Encoding.UTF8)
+            Dim flameLanguage As New FlameLang
+            Dim dslLanguage = flameLanguage.Parse(flameLanguageSourceCode)
+            If TypeOf dslLanguage Is Language Then
+                If Not Compilers.ContainsKey(dslLanguage.Name.ToLower) Then
+                    Languages(dslLanguage.Name.ToLower) = dslLanguage
+                    Compilers(dslLanguage.Name.ToLower) = New LanguageCompiler(dslLanguage)
+                    Dim mnu As New ToolStripMenuItem(dslLanguage.Name)
+                    mnu.Tag = dslLanguage
                     mnu.CheckOnClick = True
 
                     AddHandler mnu.Click, Sub()
@@ -495,16 +495,16 @@ Public Class frmMain
     Sub Compile()
 
 
-        Dim lng As Language
+        Dim flameLanguage As Language
 
         For Each it In LanguageMenu
             If it.Checked Then
-                lng = it.Tag
+                flameLanguage = it.Tag
                 Exit For
             End If
         Next
 
-        If lng Is Nothing Then
+        If flameLanguage Is Nothing Then
             Exit Sub
         End If
 
@@ -513,8 +513,8 @@ Public Class frmMain
         txtSavingProgress.Text = ""
         txtCode.Markers.DeleteAll()
         lvwOutputFiles.Items.Clear()
-        Dim lngCompiller As New LanguageCompiler(lng)
-        Dim Result = lngCompiller.Parce(txtCode.Text)
+        Dim dslCompiller As New LanguageCompiler(flameLanguage)
+        Dim Result = dslCompiller.Parce(txtCode.Text)
 
         If TypeOf Result Is List(Of ErrorInformation) Then
 
@@ -534,37 +534,109 @@ Public Class frmMain
             outputPath.RemoveAt(outputPath.Count - 1)
             Dim OutputFolder As String = Join(outputPath.ToArray, "\")
 
-            Dim OutpusFiles = lngCompiller.Compile(lng, Result)
+            Dim OutpusFiles = dslCompiller.Compile(flameLanguage, Result)
 
 
             Dim i As Integer = 1
             Dim OutputEncoding As Encoding = New UTF8Encoding(False)
             Dim OutputLines As Integer = 0
             Dim InputLines As Integer = StringUtilities.CountTextLines(txtCode.Text)
+            Dim CompilableFiles As New List(Of String)
+
             For Each it In OutpusFiles
                 Dim Itm As New ListViewItem($"{i.ToString} - {it.FileName}", 0)
                 OutputLines += StringUtilities.CountTextLines(it.Content)
                 Itm.SubItems.Add(StringUtilities.CountTextLines(it.Content))
                 Itm.SubItems.Add($"{Now.ToString("yyyy-MM-dd HH:mm:ss")}")
                 Itm.Tag = $"{OutputFolder}\{it.FileName}"
+
+                If Itm.Tag.ToString.EndsWith($".{FlameLib.FlameLang.CodeFileExtension}") Then
+                    CompilableFiles.Add(Itm.Tag.ToString)
+                End If
+
                 lvwOutputFiles.Items.Add(Itm)
                 i += 1
                 My.Computer.FileSystem.WriteAllText($"{OutputFolder}\{it.FileName}", it.Content, False, OutputEncoding)
             Next
 
+            Dim CompiledFiles As New Hashtable
+
+            Do While CompilableFiles.Count > 0
+                Dim currentFile As String = CompilableFiles(0)
+                CompiledFiles(currentFile) = currentFile
+                CompilableFiles.RemoveAt(0)
+                Dim FlameSrc = GetSourceFile(currentFile, OutputFolder)
+
+                If FlameSrc <> "" Then
+
+                    Dim DSL_Src As String = My.Computer.FileSystem.ReadAllText(currentFile, System.Text.Encoding.UTF8)
+                    Dim tempflameLanguage As New FlameLang
+                    Dim currentDslLanguage = tempflameLanguage.Parse(FlameSrc)
+
+
+                    Dim currentDSLCompiller As New LanguageCompiler(currentDslLanguage)
+                    Dim currentResult = currentDSLCompiller.Parce(DSL_Src)
+
+                    If TypeOf currentResult IsNot List(Of ErrorInformation) Then
+                        '
+                        Dim currentOutpusFiles = currentDSLCompiller.Compile(currentDslLanguage, Result)
+                        For Each it In currentOutpusFiles
+                            Dim Itm As New ListViewItem($"{i.ToString} - {it.FileName}", 0)
+                            OutputLines += StringUtilities.CountTextLines(it.Content)
+                            Itm.SubItems.Add(StringUtilities.CountTextLines(it.Content))
+                            Itm.SubItems.Add($"{Now.ToString("yyyy-MM-dd HH:mm:ss")}")
+                            Itm.Tag = $"{OutputFolder}\{it.FileName}"
+
+                            If it.FileName.EndsWith($".{FlameLib.FlameLang.CodeFileExtension}") And Not CompiledFiles.ContainsKey($"{OutputFolder}\{it.FileName}") Then
+                                CompilableFiles.Add($"{OutputFolder}\{it.FileName}")
+                            End If
+
+                            lvwOutputFiles.Items.Add(Itm)
+                            i += 1
+                            My.Computer.FileSystem.WriteAllText($"{OutputFolder}\{it.FileName}", it.Content, False, OutputEncoding)
+                        Next
+
+                    End If
+
+                End If
+
+
+            Loop
+
+
+
+
 
             Dim SavingPrc As Integer = StringUtilities.CalcCodeSaving(txtCode.Text, OutputLines)
-            progressCodeSaving.Value = SavingPrc
-            txtSavingProgress.Text = $"{SavingPrc}%"
+                progressCodeSaving.Value = SavingPrc
+                txtSavingProgress.Text = $"{SavingPrc}%"
 
-            'CalcCodeSaving
+                'CalcCodeSaving
 
-            TabControl1.SelectedTab = TabPage2
+                TabControl1.SelectedTab = TabPage2
 
 
-        End If
+            End If
     End Sub
 
+    Function GetSourceFile(DslFilePath As String, xOutputFolder As String) As String
+        Dim Parts = DslFilePath.Split(".").ToList
+        Parts.RemoveAt(Parts.Count - 1)
+        Dim LanguageName As String = Parts.Last
+
+        Dim files As ReadOnlyCollection(Of String)
+
+        files = My.Computer.FileSystem.GetFiles(xOutputFolder, FileIO.SearchOption.SearchAllSubDirectories, $"*.{LanguageName}.{FlameLib.FlameLang.Extension}")
+
+        For Each it In files
+
+            Dim Source = My.Computer.FileSystem.ReadAllText(it, System.Text.Encoding.UTF8)
+            Return Source
+            Exit For
+        Next
+
+        Return ""
+    End Function
 
     Private Sub lvwOutputFiles_DoubleClick(sender As Object, e As EventArgs) Handles lvwOutputFiles.DoubleClick
         If lvwOutputFiles.SelectedItems.Count > 0 Then

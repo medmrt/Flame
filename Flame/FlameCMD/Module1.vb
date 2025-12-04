@@ -79,7 +79,7 @@ Module Module1
             Return "Error: No Language File Founded!"
 
         Catch ex As Exception
-            Return "Error"
+            Return $"Error:{ex.Message}"
         End Try
 
 
