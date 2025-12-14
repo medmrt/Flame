@@ -31,12 +31,14 @@ Public Class LanguageCompiler
                 Lines.Add(ln.Text)
             Next
             Dim TemplateText As String = Join(Lines.ToArray, vbNewLine)
-            Dim obj = ScriptObject.From(tree.Root.AstNode.RuleObject)
-            Dim x = Template.Parse(TemplateText)
+            Dim astObj = ScriptObject.From(tree.Root.AstNode.RuleObject)
+            Dim TextTemplateObj = Template.Parse(TemplateText)
+
+            Dim FileNameTemplateObj = Template.Parse(Comp.OutputFile)
 
 
-            _OutputFiles.Add(New OutputFile(Comp.OutputFile, x.Render(obj)))
-
+            _OutputFiles.Add(New OutputFile(FileNameTemplateObj.Render(astObj), TextTemplateObj.Render(astObj)))
+            '_OutputFiles.Add(New OutputFile( Comp.OutputFile, TextTemplateObj.Render(astObj)))
 
             ' txtOuput.Text = $"{Comp.OutputFile}{vbNewLine }" & x.Render(obj) & $"{vbNewLine}{obj.ToString()}"
 

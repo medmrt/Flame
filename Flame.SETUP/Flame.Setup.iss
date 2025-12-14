@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Flame"
-#define MyAppVersion "1.2025.12.04"
+#define MyAppVersion "1.2025.12.14"
 #define MyAppPublisher "medmrt@gmail.com"
 #define MyAppURL "https://www.medmrt.com/"
 #define MyAppExeName "Flame.exe"
