@@ -50,6 +50,7 @@ Partial Class frmLanguageRun
         Me.lblPos = New System.Windows.Forms.ToolStripStatusLabel()
         Me.progressCodeSaving = New System.Windows.Forms.ToolStripProgressBar()
         Me.txtSavingProgress = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ExportProgramJSONToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.txtCode, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -113,7 +114,7 @@ Partial Class frmLanguageRun
         'ToolStripDropDownButton1
         '
         Me.ToolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.ToolStripDropDownButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.CompileToolStripMenuItem})
+        Me.ToolStripDropDownButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.CompileToolStripMenuItem, Me.ExportProgramJSONToolStripMenuItem})
         Me.ToolStripDropDownButton1.Image = CType(resources.GetObject("ToolStripDropDownButton1.Image"), System.Drawing.Image)
         Me.ToolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripDropDownButton1.Name = "ToolStripDropDownButton1"
@@ -124,14 +125,14 @@ Partial Class frmLanguageRun
         '
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
         Me.ToolStripMenuItem2.ShortcutKeys = System.Windows.Forms.Keys.F4
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(138, 22)
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(195, 22)
         Me.ToolStripMenuItem2.Text = "Parse"
         '
         'CompileToolStripMenuItem
         '
         Me.CompileToolStripMenuItem.Name = "CompileToolStripMenuItem"
         Me.CompileToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5
-        Me.CompileToolStripMenuItem.Size = New System.Drawing.Size(138, 22)
+        Me.CompileToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
         Me.CompileToolStripMenuItem.Text = "Compile"
         '
         'ToolStripDropDownButton3
@@ -253,7 +254,7 @@ Partial Class frmLanguageRun
         Me.TabControl1.Location = New System.Drawing.Point(3, 3)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(957, 99)
+        Me.TabControl1.Size = New System.Drawing.Size(957, 95)
         Me.TabControl1.TabIndex = 2
         '
         'TabPage1
@@ -262,7 +263,7 @@ Partial Class frmLanguageRun
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(949, 73)
+        Me.TabPage1.Size = New System.Drawing.Size(949, 69)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Console"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -287,7 +288,7 @@ Partial Class frmLanguageRun
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(949, 73)
+        Me.TabPage2.Size = New System.Drawing.Size(949, 69)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Output"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -301,7 +302,7 @@ Partial Class frmLanguageRun
         Me.lvwOutputFiles.HideSelection = False
         Me.lvwOutputFiles.Location = New System.Drawing.Point(3, 3)
         Me.lvwOutputFiles.Name = "lvwOutputFiles"
-        Me.lvwOutputFiles.Size = New System.Drawing.Size(943, 67)
+        Me.lvwOutputFiles.Size = New System.Drawing.Size(943, 63)
         Me.lvwOutputFiles.TabIndex = 0
         Me.lvwOutputFiles.UseCompatibleStateImageBehavior = False
         Me.lvwOutputFiles.View = System.Windows.Forms.View.Details
@@ -365,6 +366,12 @@ Partial Class frmLanguageRun
         Me.txtSavingProgress.Size = New System.Drawing.Size(23, 20)
         Me.txtSavingProgress.Text = "0%"
         '
+        'ExportProgramJSONToolStripMenuItem
+        '
+        Me.ExportProgramJSONToolStripMenuItem.Name = "ExportProgramJSONToolStripMenuItem"
+        Me.ExportProgramJSONToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
+        Me.ExportProgramJSONToolStripMenuItem.Text = "Export Program (JSON)"
+        '
         'frmLanguageRun
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -422,4 +429,5 @@ Partial Class frmLanguageRun
     Friend WithEvents progressCodeSaving As ToolStripProgressBar
     Friend WithEvents txtSavingProgress As ToolStripStatusLabel
     Friend WithEvents lblPos As ToolStripStatusLabel
+    Friend WithEvents ExportProgramJSONToolStripMenuItem As ToolStripMenuItem
 End Class

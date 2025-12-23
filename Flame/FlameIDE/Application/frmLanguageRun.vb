@@ -343,4 +343,52 @@ Public Class frmLanguageRun
             txtPath.Text = FileName
         End If
     End Sub
+
+    Private Sub ExportProgramJSONToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportProgramJSONToolStripMenuItem.Click
+        ExportProgram()
+    End Sub
+    Sub ExportProgram()
+
+        txtOuput.Text = ""
+        progressCodeSaving.Value = 0
+        txtSavingProgress.Text = ""
+        txtCode.Markers.DeleteAll()
+        lvwOutputFiles.Items.Clear()
+        Dim lngCompiller As New LanguageCompiler(Prg)
+        Dim Result = lngCompiller.Parce(txtCode.Text)
+
+        If TypeOf Result Is List(Of ErrorInformation) Then
+
+            Dim Err As List(Of ErrorInformation) = Result
+            Dim Tokens As New List(Of String)
+            For Each it In Err
+                Tokens.Add(it.Description)
+            Next
+            txtOuput.Text = $"Expected Tokens  ({Join(Tokens.ToArray, " | ")}) {vbNewLine } Line :{Err.First.Location.Line}"
+            TabControl1.SelectedTab = TabPage1
+            txtCode.Lines(Err.First.Location.Line).AddMarker(ErroMarkSymbolIndex)
+            txtCode.Lines(Err.First.Location.Line).AddMarker(ErroLineStyleMarkIndex)
+            txtCode.Lines(Err.First.Location.Line).Goto()
+        Else
+
+            Dim F As New FolderBrowserDialog
+            If F.ShowDialog = DialogResult.OK Then
+                Dim x = Result.Root.AstNode.RuleObject.ToString
+                Dim ExportPath As String = F.SelectedPath
+                My.Computer.FileSystem.WriteAllText(Path.Combine(ExportPath, $"{Prg.Name}.json"), x, False, New UTF8Encoding(False))
+                For Each it As Compile In Prg.Compilers
+                    Dim Lines As New List(Of String)
+                    For Each ln As SimpleText In it.Body
+                        Lines.Add(ln.Text)
+                    Next
+
+
+                    My.Computer.FileSystem.WriteAllText(Path.Combine(ExportPath, $"{it.Name}.scriban "), $"{Join(Lines.ToArray, vbNewLine)}", False, New UTF8Encoding(False))
+                Next
+
+                Process.Start(F.SelectedPath)
+            End If
+
+        End If
+    End Sub
 End Class

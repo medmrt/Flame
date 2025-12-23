@@ -212,6 +212,10 @@ Public Class frmMain
         MsgBox("No Error!")
     End Sub
 
+    Sub ExportJSON()
+
+    End Sub
+
     Function GetNextToken() As List(Of String)
         Dim SynError As List(Of ErrorInformation)
         Dim SemanticError As List(Of ErrorInformation)
@@ -491,6 +495,11 @@ Public Class frmMain
         Else
             MsgBox("No File founded")
         End If
+
+    End Sub
+
+    Private Sub ExportProgramJSONToolStripMenuItem_Click(sender As Object, e As EventArgs)
+        ExportJSON()
 
     End Sub
 End Class
